@@ -1,17 +1,18 @@
 class particle():
     def __init__(self, mass, velocity, initial_position):
-        self.mass = mass
-        self.velocity = velocity
-        self.initial_position = initial_position
-        self.position = initial_position
+        self.mass = float(mass)
+        self.velocity = float(velocity)
+        self.initial_position = float(initial_position)
+        self.position = float(initial_position)
+        self.momentum = self.mass * self.velocity
     def calc_pos(self, time):
-        if self.position == 1.0:
+        if self.position >= 1.0:
             self.velocity = -self.velocity
-        elif self.position == 0.0:
+        elif self.position <= 0.0:
             self.velocity = -self.velocity
-        self.position = self.velocity * time + self.initial_position
-    def collide(self):
-        self.velocity = -self.velocity
+        self.position = float("{:.6f}".format(self.velocity * time + self.initial_position))
+    def collide(self, othervelocity):
+        self.velocity = -othervelocity
     def return_energy(self):
         return (self.mass*(self.velocity**2))/2
     def return_chamber(self):
@@ -32,8 +33,8 @@ for _ in range(int(input())):
         for i, part in enumerate(particles):
             for j, check_part in enumerate(particles):
                 if i != j and part.position == check_part.position:
-                    part.collide()
-                    check_part.collide()
+                    part.collide(check_part.velocity)
+                    check_part.collide(part.velocity)
             part.calc_pos(sec)
     left = []
     right = []
@@ -44,6 +45,7 @@ for _ in range(int(input())):
             right.append(part.return_energy())
     sum_left = sum(left)
     sum_right = sum(right)
+    print(left, right)
     if sum_left < sum_right:
         print("RIGHT")
     elif sum_left > sum_right:
