@@ -1,5 +1,5 @@
 class particle():
-    def __init__(self, mass, velocity, initial_position):
+    def __init__(self, mass, initial_position, velocity):
         self.mass = float(mass)
         self.velocity = float(velocity)
         self.initial_position = float(initial_position)
@@ -10,7 +10,7 @@ class particle():
             self.velocity = -self.velocity
         elif self.position <= 0.0:
             self.velocity = -self.velocity
-        self.position = float("{:.6f}".format(self.velocity * time + self.initial_position))
+        self.position = round(self.velocity * time + self.initial_position, 6)
     def collide(self, othervelocity):
         self.velocity = -othervelocity
     def return_energy(self):
@@ -45,7 +45,6 @@ for _ in range(int(input())):
             right.append(part.return_energy())
     sum_left = sum(left)
     sum_right = sum(right)
-    print(left, right)
     if sum_left < sum_right:
         print("RIGHT")
     elif sum_left > sum_right:
