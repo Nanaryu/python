@@ -1,0 +1,7 @@
+samolot: 1
+lata: 1
+na: 1
+drzewo: 1
+gdzieś: 1
+coś: 1
+jakoś: 1
