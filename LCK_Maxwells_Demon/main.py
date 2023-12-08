@@ -29,12 +29,12 @@ for _ in range(int(input())):
     for _ in range(number_of_particles):
         p_info = input().split(" ")
         particles.append(particle(p_info[0], p_info[1], p_info[2]))
+    particles = sorted(particles, key=lambda x: x.position)
     for sec in range(int(time)):
         for i, part in enumerate(particles):
-            for j, check_part in enumerate(particles):
-                if i != j and part.position == check_part.position:
-                    part.collide(check_part.velocity)
-                    check_part.collide(part.velocity)
+            if i != 0:
+                if part.velocity > 0:
+                    particles[i+1]
             part.calc_pos(sec)
     left = []
     right = []
