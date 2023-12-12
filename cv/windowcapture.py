@@ -26,9 +26,9 @@ class WindowCapture:
         self.h = window_rect[3] - window_rect[1]
 
         # account for the window border and titlebar and cut them off
-        border_pixels = 2  #
-        titlebar_pixels = 32 #  12w 8h tiles 80x80 ROI
-        self.w = self.w - 42  #  half tile + 13w + half tile; 9w so height of the program is 9*80
+        border_pixels = 0  #/////////////////
+        titlebar_pixels = 0 #  12w 8h tiles 80x80 ROI ////////////////////
+        self.w = self.w - 0  #  half tile + 13w + half tile; 9w so height of the program is 9*80 ////////////// CURRENTLY DISABLED
         self.h = self.h - titlebar_pixels - border_pixels
         self.cropped_x = border_pixels
         self.cropped_y = titlebar_pixels
