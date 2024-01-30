@@ -76,8 +76,8 @@ def translator(argument, origin):
 				return servmsg(argument[2:])
 			elif header == '08': 
 				return gotcha(argument[2:])
-			elif header == '09':
-				return takeatk(argument[2:])
+			elif header == '1e':
+				return takeatk(argument[4:])
 			elif header == '3f':
 				return showobj(argument[2:])
 			""" 

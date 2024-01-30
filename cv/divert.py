@@ -38,11 +38,11 @@ with w:
     for packet in w:
         data = packet.payload.hex()
         if data:
-            if packet.src_addr == current_server:
-                data = translator(data, 'server')
+            if packet.src_addr == current_server and data[2:4] == "3f":
+                #data = translator(data, 'server')
                 print(f"Server -> {data}")
             elif packet.dst_addr == current_server:
                 data = translator(data, 'client')
-                print(f"Client -> {data}")
+                #print(f"Client -> {data}")
             w.send(packet)
             

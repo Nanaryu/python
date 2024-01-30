@@ -15,7 +15,7 @@ import ctypes
 
 if cv.ocl.haveOpenCL(): cv.ocl.setUseOpenCL(True)
 
-WINDOW_NAME = "repos"
+WINDOW_NAME = "NoxPlayer"
 
 hwnd = win32gui.FindWindowEx(None, None, None, WINDOW_NAME)
 
@@ -56,7 +56,9 @@ blackwhite = HsvFilter(0, 0, 237, 0, 153, 255, 0, 0, 0, 0)
 focus_window(WINDOW_NAME)
 sleep(1) # delay because without it CreateCompatibleDC failed is thrown
 
-c(391, 263, 2, 0.5)
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+enemy = Vision("lizcap.png")
 
 while True:
     try:
@@ -66,11 +68,18 @@ while True:
         # get an updated image of the game
         screenshot = wincap.get_screenshot()
 
-        x, y = win32gui.ClientToScreen(hwnd, (391 - window_rect[0], 263 - window_rect[1]))
-        #print(x, y)
-        cv.circle(screenshot, (x, y), 5, (0,233,0), -1)
+        processed = enemy.apply_hsv_filter(screenshot, blackwhite)
+
+        rectangles = enemy.find(processed, 0.5)
+
+        print(rectangles)
+
+        if len(rectangles):
+            for x, y, w, h in rectangles:
+                x, y = win32gui.ClientToScreen(hwnd, (x - window_rect[0], y - window_rect[1]))
+                enemy.show_found(screenshot, rectangles)
         
-        cv.imshow("a",screenshot)
+        cv.imshow("a",processed)
         # press 'q' with the output window focused to exit.
         if cv.waitKey(1) == ord('q'):
             cv.destroyAllWindows()

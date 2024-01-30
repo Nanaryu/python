@@ -176,7 +176,7 @@ def gotcha(salute):
 	except Exception as e:
 		return f"An unknown error occurred - gotcha - {e}"
 	
-def takeatk(whotowho):
+def takeatk(args):
 	"""
 	Client -> Attack entity ID 00000000
 	Server -> 0f1e0000000000000000600d00000000
@@ -185,7 +185,6 @@ def takeatk(whotowho):
 	Client -> Attack entity ID 00000000
 	Server -> 0f1e0000000000000000600d00000000
 	Client -> Attack entity ID 00000d89
-	Server -> 1823011a14033c056c06a8001a040000ad80d5000000058880
 	Server -> 0f1e00000d8900000000600d00000d89
 	Client -> Attack entity ID 00000000
 	Server -> 0f1e0000000000000000600d00000000
@@ -195,29 +194,15 @@ def takeatk(whotowho):
 	Client -> Attack entity ID 00000000
 	Server -> 0f1e0000000000000000600d00000000
 	"""
+	
 	try:
-		# \x09 
-		lastindex = 0
-		returnable = ""
-		
-		while lastindex < len(whotowho):
-			if whotowho[lastindex:lastindex + 1] == '09' and lastindex != 0:
-				monster_id = int(whotowho[lastindex + 1:lastindex + 5], 16)
-				victim_id = int(whotowho[lastindex + 5:lastindex + 9], 16)
-				lastindex += 10
-				returnable += f"Monster {monster_id} attacks player {victim_id}.|"
-			elif lastindex == 0:
-				monster_id = int(whotowho[lastindex:lastindex + 4], 16)
-				victim_id = int(whotowho[lastindex + 4:lastindex + 8], 16)
-				lastindex += 9
-				
-				if monster_id > 65536:
-					returnable += f"Player attacks monster {monster_id}.|"
-				else:
-					returnable += f"Monster {monster_id} attacks player {victim_id}."
-			else:
-				return f" ATTK STRING >>> {returnable}"
-		return returnable
+		entityID = args[:8]
+		playerID = args[8:20] # PROBABLY
+		if entityID == '00000000':
+			return f'Player {playerID} deselects mob'
+		else:
+			return f'Player {playerID} attacks mob {entityID}'
+
 	except Exception as e:
 		return f"An unknown error occurred - takeatk - {e}"
 
