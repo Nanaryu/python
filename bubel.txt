@@ -1,0 +1,34 @@
+create table array (
+	indx int not null auto_increment,
+	number int,
+	primary key (indx)
+)//
+
+insert into array values (null, 4),(null, 2),(null, 3),(null, 1)//
+
+create procedure bub()
+begin
+	declare i int default 1;
+	declare j int default 1;
+	declare a int;
+	declare b int;
+	declare t int;
+	declare ln int;
+	SET ln = (SELECT COUNT(*) FROM array);
+	while i < ln do
+		set j = 0;
+		while j < ln - i do
+			set a = (select number from array where indx = j);
+			set b = (select number from array where indx = j + 1);
+			if a > b then
+				set t = a;
+				set a = b;
+				set b = t;
+				update array set number = a where indx = j;
+				update array set number = b where indx = j + 1;
+			end if;
+			set j = j + 1;
+		end while;
+		set i = i + 1; 
+	end while;
+end;//
