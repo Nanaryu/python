@@ -2,18 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp2.MainPage">
-
+    
+    <VerticalStackLayout
+        Padding="15,0"
+        Spacing="5
+            <Label x:Name="prev" Text="0" HorizontalOptions="Fill" FontSize="Small" />
+            <Label x:Name="operation" Text="-" HorizontalOptions="Fill" FontSize="Small" />
+            <Label x:Name="field" Text="0" HorizontalOptions="Fill" FontSize="Large" />
+     </VerticalStackLayout>
+        
     <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*">
         <VerticalStackLayout
             Padding="15,0"
             Spacing="5">
-            <Label
-                x:Name="field"
-                Text="0"
-                HorizontalOptions="Fill"
-                Grid.Column="1"
-                Grid.Row="2"
-                />
+            
             <HorizontalStackLayout
                 Padding="0"
                 Spacing="5">
@@ -34,6 +36,14 @@
                 <Button x:Name="a7" Text="7" Clicked="add"/>
                 <Button x:Name="a8" Text="8" Clicked="add"/>
                 <Button x:Name="a9" Text="9" Clicked="add"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout
+                Padding="0"
+                Spacing="5">
+                <Button x:Name="b1" Text="+" Clicked="plus"/>
+                <Button x:Name="b2" Text="-" Clicked="minus"/>
+                <Button x:Name="b3" Text="C" Clicked="clear"/>
+                <Button x:Name="b3" Text="=" Clicked="equal"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </Grid>
