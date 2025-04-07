@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.MainPage">
+
+
+    <Grid RowDefinitions="10., *">
+        <Grid.Background>
+                
+        <LinearGradientBrush StartPoint="0,0"
+                        EndPoint="1,1"
+                        x:Name="gradientB">
+            
+            <GradientStop Color="Aqua" Offset="0.0"/>
+            <GradientStop Color="Aqua" Offset="0.25"/>
+            <GradientStop Color="Aqua" Offset="0.5"/>
+            <GradientStop Color="Aqua" Offset="1.0"/>
+
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Frame Grid.Row="1" Margin="0,400,0,200" HorizontalOptions="End">
+            <HorizontalStackLayout>
+                <Button Text="Change Gradient" Clicked="Button_Clicked"/>
+                <Button Text="Toggle" Clicked="Button_Clicked_1" />
+            </HorizontalStackLayout>
+           
+        </Frame>
+            
+        
+    </Grid>
+</ContentPage>
